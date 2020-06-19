@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<div class="col-md-8 offset-md-2">
+    <h1>Blog Index  &nbsp; <a href="{% url 'add_post' %}" class="btn btn-primary">Add New Post</a></h1>
+    <hr>
+    {% for post in posts %}
+    <h2><a href="{% url 'blog_detail' post.pk %}">{{ post.title }}</a></h2>
+    <small>
+        Made by : {{ post.user.username }} | {{ post.created_on.date }} | {{post.created_on.time}} |&nbsp;
+        Project:&nbsp
+        <a href="{% url 'blog_project' post.project.title %}">
+            {{ post.project.title }}
+        </a>&nbsp;
+    </small>
+    <p>{{ post.body | slice:":40" }}...</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+<h1>projects belonging to category : {{ projectCategory.name }}</h1>
+<div class="row">
+{% for project in projects %}
+    <div class="col-md-4" >
+        <div class="card mb-2" style="height:250px">
+            <!--img class="card-img-top" src="{% static project.image %}"-->
+            <div class="card-body" align="center">
+                <h5 class="card-title">{{ project.title }}</h5>
+                <p class="card-text">{{ project.description | slice:":120" }}</p>
+                <p>Done By : <!--a href="{% url 'user_project_index' project.user.username %}"--> {{project.user.username}}<!--/a--></p>
+                <a href="{% url 'project_detail' project.pk %}"
+                   class="btn btn-primary" align="center">
+                    Read More
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
